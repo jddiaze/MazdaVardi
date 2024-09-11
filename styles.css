@@ -11,6 +11,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;  /* Evitar desplazamiento */
+    touch-action: manipulation;  /* Mejorar la interacción táctil */
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    background: #f2f2f2;
+    border: 2px solid #000;
+    width: 100%;
+    height: 100vh;  /* Llenar toda la pantalla verticalmente */
 }
 
 .container {
@@ -25,7 +38,7 @@ body {
 }
 
 .logo img {
-    width: 150px;
+    width: 450px;
     animation: bounce 2s infinite;
 }
 

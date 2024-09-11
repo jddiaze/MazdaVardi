@@ -16,6 +16,10 @@ carImage.src = 'car.png'; // Imagen del coche
 const heartImage = new Image();
 heartImage.src = 'heart.png'; // Imagen del corazón
 
+// Cargar sonidos
+const pickupSound = new Audio('pickup.mp3');  // Sonido al recoger corazón
+const crashSound = new Audio('crash.mp3');    // Sonido de choque
+
 // Vehículo (jugador)
 const car = {
     x: canvasWidth / 2 - 20,
@@ -90,6 +94,26 @@ document.addEventListener("keyup", (event) => {
     if (event.key === "ArrowLeft") car.moveLeft = false;
     if (event.key === "ArrowRight") car.moveRight = false;
 });
+
+// Controles touch para móviles
+canvas.addEventListener('touchstart', function(e) {
+    const touchX = e.touches[0].clientX - canvas.getBoundingClientRect().left;  // Ajuste para obtener la posición relativa al canvas
+
+    if (touchX < canvasWidth / 2) {
+        car.moveLeft = true;
+        car.moveRight = false;  // Asegúrate de que no se mueva en ambas direcciones
+    } else {
+        car.moveRight = true;
+        car.moveLeft = false;  // Asegúrate de que no se mueva en ambas direcciones
+    }
+});
+
+canvas.addEventListener('touchend', function(e) {
+    // Detener el movimiento cuando se suelta el toque
+    car.moveLeft = false;
+    car.moveRight = false;
+});
+
 
 // Detección de colisiones
 function detectCollision(obj1, obj2) {
