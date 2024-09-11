@@ -28,6 +28,15 @@ function resizeCanvas() {
     ctx.setTransform(scale, 0, 0, scale, 0, 0);  // Aplicar la escala al contexto de dibujo
 }
 
+let darkModeActive = false;
+
+// Función para cambiar los colores de los obstáculos según el modo oscuro
+function updateObstacleColors() {
+    obstacles.forEach(obstacle => {
+        obstacle.color = darkModeActive ? '#fff' : '#333'; // Cambiar color a blanco en modo oscuro
+    });
+}
+
 // Ajustar el canvas al tamaño de la pantalla en el momento de cargar y cuando cambia el tamaño de la ventana
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();  // Llamar inicialmente
@@ -39,20 +48,19 @@ let spawnRate = 0.02;  // Tasa inicial de aparición de corazones y obstáculos
 
 // Actualizar puntuación para que siempre sea visible
 const scoreDisplay = document.createElement('div');
-scoreDisplay.id = 'score';
-document.body.appendChild(scoreDisplay);
+//scoreDisplay.id = 'score';
+//document.body.appendChild(scoreDisplay);
 
 // Función para actualizar el puntaje
 function updateScore() {
     scoreDisplay.textContent = `Puntuación: ${score}`;
 }
 
-// Modo oscuro: Cambiar color de los obstáculos
+// Modo oscuro: Cambiar color de fondo del canvas y actualizar colores de los obstáculos
 themeSwitch.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode');
-    obstacles.forEach(obstacle => {
-        obstacle.color = themeSwitch.checked ? '#fff' : '#333';
-    });
+    darkModeActive = themeSwitch.checked;
+    document.body.classList.toggle('dark-mode', darkModeActive);
+    updateObstacleColors(); // Cambiar los colores de los obstáculos cuando cambia el modo
 });
 
 

@@ -23,8 +23,15 @@ button {
     background: none;
     border: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 40px;
     cursor: pointer;
+    /*width: 50px;  /* Definir tamaño fijo para los botones */
+    /*height: 50px;*/
+}
+
+button i {
+    width: 100%;  /* Asegurar que el ícono ocupe todo el espacio del botón */
+    height: 100%;
 }
 
 button:hover {
@@ -55,7 +62,7 @@ canvas {
     top: 10px;
     left: 10px;
     display: flex;
-    gap: 10px;
+    gap: 20px;
     z-index: 1;
 }
 
