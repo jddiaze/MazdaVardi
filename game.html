@@ -2,20 +2,17 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corazones en el Camino</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-
     <div class="controls">
-        <button class="back-button">Atrás</button>
-        <button class="reset-button">Reiniciar</button>
+        <button class="back-button"><i class="fas fa-arrow-left"></i></button>
+        <button class="reset-button"><i class="fas fa-redo"></i></button>
         <div class="theme-toggle">
-            <label for="theme-switch">Modo oscuro/claro</label>
+            <label for="theme-switch" class="theme-label">🌞</label>
             <input type="checkbox" id="theme-switch">
+            <label for="theme-switch" class="theme-label">🌜</label>
         </div>
     </div>
 
@@ -23,5 +20,6 @@
 
     <script src="game.js"></script>
 </body>
+
 
 </html>

@@ -19,6 +19,18 @@ body {
     touch-action: manipulation;  /* Mejorar la interacción táctil */
 }
 
+button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: #ff4444;
+}
+
 canvas {
     display: block;
     width: 100vw;
@@ -40,11 +52,10 @@ canvas {
 
 .controls {
     position: absolute;
-    top: 0;
-    width: 100%;
+    top: 10px;
+    left: 10px;
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    gap: 10px;
     z-index: 1;
 }
 
@@ -64,6 +75,7 @@ canvas {
 .theme-toggle {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .theme-toggle label {
@@ -72,7 +84,44 @@ canvas {
 }
 
 #theme-switch {
+    appearance: none;
+    width: 50px;
+    height: 25px;
+    background-color: #ddd;
+    border-radius: 25px;
+    position: relative;
     cursor: pointer;
+    outline: none;
+}
+
+#theme-switch:checked {
+    background-color: #222;
+}
+
+#theme-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 21px;
+    height: 21px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+#theme-switch:checked::before {
+    left: 26px;
+}
+
+#gameCanvas {
+    display: block;
+    margin: 0 auto;
+    background-color: #f2f2f2;
+}
+
+.theme-label {
+    font-size: 24px;
 }
 
 /* Modo oscuro */
@@ -81,7 +130,15 @@ canvas {
 }
 
 .dark-mode canvas {
-    background-color: #333;
+    background-color: #222;
+}
+
+.dark-mode .controls button {
+    color: #fff;
+}
+
+.dark-mode .theme-label {
+    color: #fff;
 }
 
 .dark-mode .controls {
@@ -127,6 +184,20 @@ canvas {
 
 .start-button:hover {
     background-color: #0b61a4;
+}
+
+/* Puntuación */
+#score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #000;
+    font-size: 20px;
+    z-index: 1;
+}
+
+.dark-mode #score {
+    color: #fff;
 }
 
 /* Animaciones */

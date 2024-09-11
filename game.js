@@ -37,6 +37,25 @@ let gameOver = false;
 let gameSpeed = 2;  // Velocidad inicial del juego
 let spawnRate = 0.02;  // Tasa inicial de aparición de corazones y obstáculos
 
+// Actualizar puntuación para que siempre sea visible
+const scoreDisplay = document.createElement('div');
+scoreDisplay.id = 'score';
+document.body.appendChild(scoreDisplay);
+
+// Función para actualizar el puntaje
+function updateScore() {
+    scoreDisplay.textContent = `Puntuación: ${score}`;
+}
+
+// Modo oscuro: Cambiar color de los obstáculos
+themeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+    obstacles.forEach(obstacle => {
+        obstacle.color = themeSwitch.checked ? '#fff' : '#333';
+    });
+});
+
+
 // Cargar imágenes
 const carImage = new Image();
 carImage.src = 'car.png'; // Imagen del coche
@@ -155,7 +174,7 @@ function detectCollision(obj1, obj2) {
 function updateGame() {
     if (!gameOver) {
         ctx.clearRect(0, 0, originalWidth, originalHeight);
-
+        updateScore();
         // Dibujar y actualizar el coche
         car.draw();
         car.update();
