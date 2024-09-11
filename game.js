@@ -51,7 +51,7 @@ const crashSound = new Audio('crash.wav');    // Sonido de choque
 // Vehículo (jugador)
 const car = {
     x: originalWidth / 2 - 20,
-    y: originalHeight - 80,
+    y: originalHeight - 120,
     width: 40,
     height: 80,
     speed: 5,
