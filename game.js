@@ -45,8 +45,8 @@ const heartImage = new Image();
 heartImage.src = 'heart.png'; // Imagen del corazón
 
 // Cargar sonidos
-const pickupSound = new Audio('pickup.mp3');  // Sonido al recoger corazón
-const crashSound = new Audio('crash.mp3');    // Sonido de choque
+const pickupSound = new Audio('chime.wav');  // Sonido al recoger corazón
+const crashSound = new Audio('crash.wav');    // Sonido de choque
 
 // Vehículo (jugador)
 const car = {
@@ -169,6 +169,7 @@ function updateGame() {
             if (detectCollision(car, {x: heart.x, y: heart.y, width: heart.size, height: heart.size})) {
                 score++;
                 hearts.splice(index, 1); // Elimina el corazón después de la colisión
+                pickupSound.play();  // Reproducir sonido al recoger un corazón
             }
 
             // Eliminar corazones fuera de la pantalla
@@ -184,6 +185,7 @@ function updateGame() {
 
             // Detectar colisión con obstáculos
             if (detectCollision(car, obstacle)) {
+                crashSound.play();  // Reproducir sonido de choque
                 gameOver = true;
             }
 
