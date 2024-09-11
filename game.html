@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corazones en el Camino</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- <style>
-        canvas {
-            display: block;
-            margin: 0 auto;
-            background: #f2f2f2;
-            border: 2px solid #000;
-        }
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-    </style> -->
 </head>
+
 <body>
 
-    <h1>Love Weekend</h1>
-    <p>¡Recoge tantos corazones como puedas y evita los obstáculos!</p>
-    <p>Entre más corazones, mayores beneficios.</p>
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <div class="controls">
+        <button class="back-button">Atrás</button>
+        <button class="reset-button">Reiniciar</button>
+        <div class="theme-toggle">
+            <label for="theme-switch">Modo oscuro/claro</label>
+            <input type="checkbox" id="theme-switch">
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
 
     <script src="game.js"></script>
-
 </body>
+
 </html>

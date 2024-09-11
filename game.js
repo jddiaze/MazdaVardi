@@ -1,8 +1,36 @@
 // Variables del juego
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+
+const resetButton = document.querySelector('.reset-button');
+const backButton = document.querySelector('.back-button');
+const themeSwitch = document.getElementById('theme-switch');
+//const canvasWidth = canvas.width;
+//const canvasHeight = canvas.height;
+
+// Dimensiones originales del canvas y del juego
+const originalWidth = 400;
+const originalHeight = 600;
+let scale;
+
+// Ajustar el canvas para mantener la proporción original
+function resizeCanvas() {
+    // Calcular la escala que mantendrá las proporciones del juego
+    const scaleWidth = window.innerWidth / originalWidth;
+    const scaleHeight = window.innerHeight / originalHeight;
+    scale = Math.min(scaleWidth, scaleHeight);  // Usar la escala menor para evitar distorsiones
+
+    // Ajustar el tamaño del canvas respetando la proporción
+    canvas.width = originalWidth * scale;
+    canvas.height = originalHeight * scale;
+
+    // Ajustar el tamaño de todo el contenido basado en la escala
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);  // Aplicar la escala al contexto de dibujo
+}
+
+// Ajustar el canvas al tamaño de la pantalla en el momento de cargar y cuando cambia el tamaño de la ventana
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();  // Llamar inicialmente
 
 let score = 0;
 let gameOver = false;
@@ -22,21 +50,21 @@ const crashSound = new Audio('crash.mp3');    // Sonido de choque
 
 // Vehículo (jugador)
 const car = {
-    x: canvasWidth / 2 - 20,
-    y: canvasHeight - 80,
+    x: originalWidth / 2 - 20,
+    y: originalHeight - 80,
     width: 40,
     height: 80,
     speed: 5,
     moveLeft: false,
     moveRight: false,
     draw() {
-        ctx.drawImage(carImage, this.x, this.y, this.width, this.height); // Dibujar el coche
+        ctx.drawImage(carImage, this.x, this.y, this.width, this.height);
     },
     update() {
         if (this.moveLeft && this.x > 0) {
             this.x -= this.speed;
         }
-        if (this.moveRight && this.x + this.width < canvasWidth) {
+        if (this.moveRight && this.x + this.width < originalWidth) {
             this.x += this.speed;
         }
     }
@@ -45,7 +73,7 @@ const car = {
 // Corazones
 class Heart {
     constructor() {
-        this.x = Math.random() * (canvasWidth - 20);
+        this.x = Math.random() * (originalWidth - 20);
         this.y = -20;
         this.size = 40;
         this.speed = gameSpeed;  // Velocidad se basa en la dificultad
@@ -63,7 +91,7 @@ class Heart {
 // Obstáculos (opcional: puedes usar una imagen o mantener el rectángulo)
 class Obstacle {
     constructor() {
-        this.x = Math.random() * (canvasWidth - 40);
+        this.x = Math.random() * (originalWidth - 40);
         this.y = -40;
         this.width = 40;
         this.height = 40;
@@ -99,7 +127,7 @@ document.addEventListener("keyup", (event) => {
 canvas.addEventListener('touchstart', function(e) {
     const touchX = e.touches[0].clientX - canvas.getBoundingClientRect().left;  // Ajuste para obtener la posición relativa al canvas
 
-    if (touchX < canvasWidth / 2) {
+    if (touchX < originalWidth / 2) {
         car.moveLeft = true;
         car.moveRight = false;  // Asegúrate de que no se mueva en ambas direcciones
     } else {
@@ -126,7 +154,7 @@ function detectCollision(obj1, obj2) {
 // Función para actualizar el juego
 function updateGame() {
     if (!gameOver) {
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(0, 0, originalWidth, originalHeight);
 
         // Dibujar y actualizar el coche
         car.draw();
@@ -144,7 +172,7 @@ function updateGame() {
             }
 
             // Eliminar corazones fuera de la pantalla
-            if (heart.y > canvasHeight) {
+            if (heart.y > originalHeight) {
                 hearts.splice(index, 1);
             }
         });
@@ -160,7 +188,7 @@ function updateGame() {
             }
 
             // Eliminar obstáculos fuera de la pantalla
-            if (obstacle.y > canvasHeight) {
+            if (obstacle.y > originalHeight) {
                 obstacles.splice(index, 1);
             }
         });
@@ -185,11 +213,30 @@ function updateGame() {
     } else {
         ctx.fillStyle = "#FF0000";
         ctx.font = "40px Arial";
-        ctx.fillText("¡Juego Terminado!", 50, canvasHeight / 2);
+        ctx.fillText("¡Juego Terminado!", 50, originalHeight / 2);
         ctx.font = "20px Arial";
-        ctx.fillText(`Puntuación Final: ${score}`, 100, canvasHeight / 2 + 50);
+        ctx.fillText(`Puntuación Final: ${score}`, 100, originalHeight / 2 + 50);
     }
 }
+
+// Función para reiniciar el juego
+function resetGame() {
+    score = 0;
+    gameOver = false;
+    hearts = [];
+    obstacles = [];
+    car.x = canvas.width / 2 - 20;
+    updateGame();
+}
+
+// Controles de reinicio y atrás
+resetButton.addEventListener('click', resetGame);
+backButton.addEventListener('click', () => window.location.href = 'index.html');
+
+// Modo oscuro/claro
+themeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+});
 
 // Iniciar el juego
 updateGame();

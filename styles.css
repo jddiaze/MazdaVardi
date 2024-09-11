@@ -5,25 +5,26 @@
 }
 
 body {
-    background-color: #000;
     font-family: 'Arial', sans-serif;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
     overflow: hidden;  /* Evitar desplazamiento */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
     touch-action: manipulation;  /* Mejorar la interacción táctil */
 }
 
 canvas {
     display: block;
-    margin: 0 auto;
-    background: #f2f2f2;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f2f2f2;
     border: 2px solid #000;
-    width: 100%;
-    height: 100vh;  /* Llenar toda la pantalla verticalmente */
 }
 
 .container {
@@ -35,6 +36,56 @@ canvas {
     justify-content: center;
     align-items: center;
     animation: fadeIn 1.5s ease-in-out;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    z-index: 1;
+}
+
+.reset-button, .back-button {
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reset-button:hover, .back-button:hover {
+    background-color: #0b61a4;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle label {
+    margin-right: 10px;
+    color: #fff;
+}
+
+#theme-switch {
+    cursor: pointer;
+}
+
+/* Modo oscuro */
+.dark-mode {
+    background-color: #000;
+}
+
+.dark-mode canvas {
+    background-color: #333;
+}
+
+.dark-mode .controls {
+    color: #fff;
 }
 
 .logo img {
