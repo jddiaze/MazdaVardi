@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.logo img {
+    width: 150px;
+    animation: bounce 2s infinite;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: glow 1.5s infinite alternate;
+}
+
+.description {
+    font-size: 1.2rem;
+    color: #ddd;
+    margin-top: 10px;
+    max-width: 80%;
+    animation: fadeInText 2s ease-out 1s forwards;
+    opacity: 0;
+}
+
+.start-button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background-color: #1e90ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    animation: buttonPulse 1.5s infinite ease-in-out;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #0b61a4;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #1e90ff, 0 0 20px #1e90ff, 0 0 30px #1e90ff, 0 0 40px #1e90ff;
+    }
+    100% {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff;
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes buttonPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
