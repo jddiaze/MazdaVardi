@@ -254,6 +254,8 @@ function resetGame() {
     gameOver = false;
     hearts = [];
     obstacles = [];
+    gameSpeed = 2;  // Velocidad inicial del juego
+    spawnRate = 0.02;  // Tasa inicial de aparición de corazones y obstáculos
     car.x = canvas.width / 2 - 20;
     updateGame();
 }
